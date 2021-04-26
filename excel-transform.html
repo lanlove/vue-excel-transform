@@ -66,10 +66,25 @@
 										<i class="material-icons">assignment</i>
 									</div>
 									<h4 class="card-title">Excel Transform</h4>
+									<p class="card-category"> Here is a subtitle for this table</p>
 								</div>
 								<div class="card-body">
 									<div class="toolbar">
-										<button type="button" v-if="isShow" @click="onexport" class="btn btn-fill btn-rose" >Explore Excel</button>
+										<template v-if="isShow">
+											<div class="row">
+												<div class="col-sm-4">
+													<label class="col-md-3 col-form-label">出貨日期</label>
+													<div class="col-md-9">
+														<div class="form-group has-default bmd-form-group">
+															<input type="text" v-model="shipDate" class="form-control">
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-8">
+													<button type="button" @click="onexport" class="btn btn-fill btn-rose" >Explore Excel</button>
+												</div>
+											</div>
+										</template>
 									</div>
 									<div class="material-datatables">
 										<div id="datatables_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -116,7 +131,7 @@
 																		<td>{{ item.商品數量 }}</td>
 																		<td>0</td>
 																		<td>黑貓宅急便</td>
-																		<td>2021-04-19(???)</td>
+																		<td>{{ shipDate }}</td>
 																		<td></td>
 																	</tr>
 																</template>
@@ -175,7 +190,9 @@
 	<!-- Plugin for the Perfect Scrollbar -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
 	<!--  Plugin for Sweet Alert -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<!-- Include a polyfill for ES6 Promises (optional) for IE11 -->
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
 	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js"></script>
 	<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
@@ -192,6 +209,7 @@
 		el: '#app',
 		data: {
 			isShow: false,
+			shipDate: null,
 			showTransformData: []
 		},
 		methods: {
@@ -234,9 +252,19 @@
 				reader.readAsArrayBuffer(file);
 			},
 			onexport: function(evt) {
+				if (null === this.shipDate)
+				{
+					Swal.fire({
+					  title: 'Error!',
+					  text: '尚未輸入出貨日期！',
+					  icon: 'error',
+					  confirmButtonText: 'Cool'
+					});
+
+					return;
+				}
 				/* generate workbook object from table */
 				var wb = XLSX.utils.table_to_book(document.getElementById('datatables'));
-				console.log(wb);
 
 				/* generate file and force a download*/
 				XLSX.writeFile(wb, "transform.xlsx");
