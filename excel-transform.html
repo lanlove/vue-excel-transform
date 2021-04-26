@@ -2,276 +2,277 @@
 <html lang="zh-TW">
 
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<title>Excel Transform</title>
-	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-	<link href="assets/css/material-dashboard.css?v=2.2.2" rel="stylesheet" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+        <title>Excel Transform</title>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+        <link href="assets/css/material-dashboard.css?v=2.2.2" rel="stylesheet" />
 </head>
 
 <body>
-	<div class="wrapper ">
-		<div class="sidebar ps" data-color="rose" data-background-color="black" data-image="assets/img/sidebar-1.jpg">
-			<div class="logo">
-				<span class="simple-text logo-normal">
-					EC Tool
-				</span>
-			</div>
-			<div class="sidebar-wrapper">
-				<ul class="nav">
-					<li class="nav-item">
-						<a class="nav-link" href="index.html">
-							<i class="material-icons">dashboard</i>
-							<p>Dashboard</p>
-						</a>
-					</li>
-					<li class="nav-item active">
-						<a class="nav-link" href="#">
-							<i class="material-icons">library_books</i>
-							<p>Excel Transform</p>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="main-panel ps">
-			<!-- Navbar -->
-			<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-				<div class="container-fluid">
-					<div class="navbar-wrapper">
-						<div class="navbar-minimize">
-						</div>
-						<a class="navbar-brand" href="javascript:;">Excel Transform</a>
-					</div>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="navbar-toggler-icon icon-bar"></span>
-						<span class="navbar-toggler-icon icon-bar"></span>
-						<span class="navbar-toggler-icon icon-bar"></span>
-					</button>
-					<div class="collapse navbar-collapse justify-content-end">
-					</div>
-				</div>
-			</nav>
-			<!-- End Navbar -->
-			<div id="app" class="content">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header card-header-primary card-header-icon">
-									<div class="card-icon">
-										<i class="material-icons">assignment</i>
-									</div>
-									<h4 class="card-title">Excel Transform</h4>
-									<p class="card-category"> Here is a subtitle for this table</p>
-								</div>
-								<div class="card-body">
-									<div class="toolbar">
-										<template v-if="isShow">
-											<div class="row">
-												<div class="col-sm-4">
-													<label class="col-md-3 col-form-label">出貨日期</label>
-													<div class="col-md-9">
-														<div class="form-group has-default bmd-form-group">
-															<input type="text" v-model="shipDate" class="form-control">
-														</div>
-													</div>
-												</div>
-												<div class="col-sm-8">
-													<button type="button" @click="onexport" class="btn btn-fill btn-rose" >Explore Excel</button>
-												</div>
-											</div>
-										</template>
-									</div>
-									<div class="material-datatables">
-										<div id="datatables_wrapper" class="dataTables_wrapper dt-bootstrap4">
-											<div class="row">
-												<div class="col-sm-12">
-													<template v-if="showTransformData.length !== 0">
-														<table id="datatables" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" cellspacing="0" width="100%" style="width: 100%;" role="grid">
-															<thead>
-																<tr role="row">
-																	<th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" >訂單編號</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">開立金額</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">付款日期</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">收件人姓名</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">收件人電話</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">郵遞區號</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">收件人地址</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">是否開發票</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">列印發票</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">條碼</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">名稱</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">規格（多欄）</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">數量</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">單價</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">預設貨運[黑貓宅急便/通盈/海外/綠界/全家/自訂1]</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">預定出貨日（文字格式）</th>
-																	<th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">超商代碼（全家/綠界）</th>
-																</tr>
-															</thead>
-															<tbody>
-																<template v-for="(item, index) in showTransformData">
-																	<tr role="row" :class="(index%2) ? 'odd' : 'even'">
-																		<td>{{ item.訂單編號 }}</td>
-																		<td>0</td>
-																		<td>2021-04-13(???)</td>
-																		<td>{{ item["收件者-姓名"] }}</td>
-																		<td>{{ item.會員電話 }}</td>
-																		<td>{{ item["收件者-郵遞區號"] }}</td>
-																		<td>{{ item["收件者-地址"] }}</td>
-																		<td>N</td>
-																		<td>N</td>
-																		<td></td>
-																		<td>{{ item.商品名稱 }}</td>
-																		<td>{{ item.商品規格 }}</td>
-																		<td>{{ item.商品數量 }}</td>
-																		<td>0</td>
-																		<td>黑貓宅急便</td>
-																		<td>{{ shipDate }}</td>
-																		<td></td>
-																	</tr>
-																</template>
-															</tbody>
-														</table>
-													</template>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-header card-header-text card-header-warning">
-									<div class="card-text">
-										<h4 class="card-title">Origin Excel</h4>
-										<p class="card-category"></p>
-									</div>
-								</div>
-								<div class="card-body table-responsive">
-									<div class="toolbar">
-										<input type="file" multiple="false" id="sheetjs-input" @change="onchange" class="form-control-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
-									</div>
-									<div class="material-datatables">
-										<div id="datatables_wrapper" class="dataTables_wrapper dt-bootstrap4">
-											<div id="out-table"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<footer class="footer">
-				<div class="container-fluid">
-					<div class="copyright float-right">
-						&copy;
-						<script>
-						document.write(new Date().getFullYear())
-						</script>, made with <i class="material-icons">favorite</i> by
-						<a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
-	<!--   Core JS Files   -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-	<script src="assets/js/core/popper.min.js" type="text/javascript"></script>
-	<script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
-	<!-- Plugin for the Perfect Scrollbar -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
-	<!--  Plugin for Sweet Alert -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-	<!-- Include a polyfill for ES6 Promises (optional) for IE11 -->
-	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-	<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js"></script>
-	<!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-	<!--  Notifications Plugin    -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js"></script>
-	<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="assets/js/core/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
-	<script src="https://unpkg.com/vue@2.x" type="text/javascript"></script>
-	<script src="assets/js/default.js" type="text/javascript"></script>
-	<script src="https://unpkg.com/xlsx/dist/xlsx.core.min.js" type="text/javascript"></script>
-	<script lang="javascript">
-	var app = new Vue({
-		el: '#app',
-		data: {
-			isShow: false,
-			shipDate: null,
-			showTransformData: []
-		},
-		methods: {
-			onchange: function(evt) {
-				var file;
-				var files = evt.target.files;
+        <div class="wrapper ">
+                <div class="sidebar ps" data-color="rose" data-background-color="black" data-image="assets/img/sidebar-1.jpg">
+                        <div class="logo">
+                                <span class="simple-text logo-normal">
+                                        EC Tool
+                                </span>
+                        </div>
+                        <div class="sidebar-wrapper">
+                                <ul class="nav">
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="index.html">
+                                                        <i class="material-icons">dashboard</i>
+                                                        <p>Dashboard</p>
+                                                </a>
+                                        </li>
+                                        <li class="nav-item active">
+                                                <a class="nav-link" href="#">
+                                                        <i class="material-icons">library_books</i>
+                                                        <p>Excel Transform</p>
+                                                </a>
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
+                <div class="main-panel ps">
+                        <!-- Navbar -->
+                        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+                                <div class="container-fluid">
+                                        <div class="navbar-wrapper">
+                                                <div class="navbar-minimize">
+                                                </div>
+                                                <a class="navbar-brand" href="javascript:;">Excel Transform</a>
+                                        </div>
+                                        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="navbar-toggler-icon icon-bar"></span>
+                                                <span class="navbar-toggler-icon icon-bar"></span>
+                                                <span class="navbar-toggler-icon icon-bar"></span>
+                                        </button>
+                                        <div class="collapse navbar-collapse justify-content-end">
+                                        </div>
+                                </div>
+                        </nav>
+                        <!-- End Navbar -->
+                        <div id="app" class="content">
+                                <div class="container-fluid">
+                                        <div class="row">
+                                                <div class="col-md-12">
+                                                        <div class="card">
+                                                                <div class="card-header card-header-primary card-header-icon">
+                                                                        <div class="card-icon">
+                                                                                <i class="material-icons">assignment</i>
+                                                                        </div>
+                                                                        <h4 class="card-title">Excel Transform</h4>
+                                                                        <p class="card-category"> Here is a subtitle for this table</p>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                        <div class="toolbar">
+                                                                                <template v-if="isShow">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-4">
+                                                                                                        <label class="col-md-3 col-form-label">出貨日期</label>
+                                                                                                        <div class="col-md-9">
+                                                                                                                <div class="form-group has-default bmd-form-group">
+                                                                                                                        <input type="text" v-model="shipDate" class="form-control">
+                                                                                                                </div>
+                                                                                                        </div>
+                                                                                                </div>
+                                                                                                <div class="col-sm-8">
+                                                                                                        <button type="button" @click="onexport" class="btn btn-fill btn-rose" >Explore Excel</button>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </template>
+                                                                        </div>
+                                                                        <div class="material-datatables">
+                                                                                <div id="datatables_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                                                        <div class="row">
+                                                                                                <div class="col-sm-12">
+                                                                                                        <template v-if="showTransformData.length !== 0">
+                                                                                                                <table id="datatables" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" cellspacing="0" width="100%" style="width: 100%;" role="grid">
+                                                                                                                        <thead>
+                                                                                                                                <tr role="row">
+                                                                                                                                        <th class="sorting_asc" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1" >訂單編號</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">開立金額</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">付款日期</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">收件人姓名</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">收件人電話</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">郵遞區號</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">收件人地址</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">是否開發票</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">列印發票</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">條碼</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">名稱</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">規格（多欄）</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">數量</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">單價</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">預設貨運[黑貓宅急便/通盈/海外/綠界/全家/自訂1]</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">預定出貨日（文字格式）</th>
+                                                                                                                                        <th class="sorting" tabindex="0" aria-controls="datatables" rowspan="1" colspan="1">超商代碼（全家/綠界）</th>
+                                                                                                                                </tr>
+                                                                                                                        </thead>
+                                                                                                                        <tbody>
+                                                                                                                                <template v-for="(item, index) in showTransformData">
+                                                                                                                                        <tr role="row" :class="(index%2) ? 'odd' : 'even'">
+                                                                                                                                                <td>{{ item.訂單編號 }}</td>
+                                                                                                                                                <td>0</td>
+                                                                                                                                                <td>2021-04-13(???)</td>
+                                                                                                                                                <td>{{ item["收件者-姓名"] }}</td>
+                                                                                                                                                <td>{{ item.會員電話 }}</td>
+                                                                                                                                                <td>{{ item["收件者-郵遞區號"] }}</td>
+                                                                                                                                                <td>{{ item["收件者-地址"] }}</td>
+                                                                                                                                                <td>N</td>
+                                                                                                                                                <td>N</td>
+                                                                                                                                                <td></td>
+                                                                                                                                                <td>{{ item.商品名稱 }}</td>
+                                                                                                                                                <td>{{ item.商品規格 }}</td>
+                                                                                                                                                <td>{{ item.商品數量 }}</td>
+                                                                                                                                                <td>0</td>
+                                                                                                                                                <td>黑貓宅急便</td>
+                                                                                                                                                <td>{{ shipDate }}</td>
+                                                                                                                                                <td></td>
+                                                                                                                                        </tr>
+                                                                                                                                </template>
+                                                                                                                        </tbody>
+                                                                                                                </table>
+                                                                                                        </template>
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col-md-12">
+                                                        <div class="card">
+                                                                <div class="card-header card-header-text card-header-warning">
+                                                                        <div class="card-text">
+                                                                                <h4 class="card-title">Origin Excel</h4>
+                                                                                <p class="card-category"></p>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="card-body table-responsive">
+                                                                        <div class="toolbar">
+                                                                                <input type="file" multiple="false" id="sheetjs-input" @change="onchange" class="form-control-file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                                                                        </div>
+                                                                        <div class="material-datatables">
+                                                                                <div id="datatables_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                                                        <div id="out-table"></div>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                        <footer class="footer">
+                                <div class="container-fluid">
+                                        <div class="copyright float-right">
+                                                &copy;
+                                                <script>
+                                                document.write(new Date().getFullYear())
+                                                </script>, made with <i class="material-icons">favorite</i> by
+                                                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+                                        </div>
+                                </div>
+                        </footer>
+                </div>
+        </div>
+        <!--   Core JS Files   -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+        <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+        <script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+        <!-- Plugin for the Perfect Scrollbar -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.0/perfect-scrollbar.min.js"></script>
+        <!--  Plugin for Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <!-- Include a polyfill for ES6 Promises (optional) for IE11 -->
+        <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+        <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js"></script>
+        <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-notify/0.2.0/js/bootstrap-notify.min.js"></script>
+        <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="assets/js/core/material-dashboard.min.js?v=2.1.2" type="text/javascript"></script>
+        <script src="https://unpkg.com/vue@2.x" type="text/javascript"></script>
+        <script src="assets/js/default.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/xlsx/dist/xlsx.core.min.js" type="text/javascript"></script>
+        <script lang="javascript">
+        var app = new Vue({
+                el: '#app',
+                data: {
+                        isShow: false,
+                        shipDate: null,
+                        showTransformData: []
+                },
+                methods: {
+                        onchange: function(evt) {
+                                var file;
+                                var files = evt.target.files;
 
-				if (!files || files.length == 0) return;
+                                if (!files || files.length == 0) return;
 
-				file = files[0];
+                                file = files[0];
 
-				let self = this;
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					// pre-process data
-					var binary = "";
-					var bytes = new Uint8Array(e.target.result);
-					var length = bytes.byteLength;
+                                let self = this;
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                        // pre-process data
+                                        var binary = "";
+                                        var bytes = new Uint8Array(e.target.result);
+                                        var length = bytes.byteLength;
 
-					for (var i = 0; i < length; i++) {
-						binary += String.fromCharCode(bytes[i]);
-					}
+                                        for (var i = 0; i < length; i++) {
+                                                binary += String.fromCharCode(bytes[i]);
+                                        }
 
-					/* read workbook */
-					var wb = XLSX.read(binary, { type: 'binary' });
+                                        /* read workbook */
+                                        var wb = XLSX.read(binary, { type: 'binary' });
 
-					/* grab first sheet */
-					var wsname = wb.SheetNames[0];
-					var ws = wb.Sheets[wsname];
+                                        /* grab first sheet */
+                                        var wsname = wb.SheetNames[0];
+                                        var ws = wb.Sheets[wsname];
 
-					/* generate HTML */
-					// origin Table
-					var HTML = XLSX.utils.sheet_to_html(ws);
-					document.getElementById('out-table').innerHTML = HTML;
+                                        /* generate HTML */
+                                        // origin Table
+                                        var HTML = XLSX.utils.sheet_to_html(ws);
+                                        document.getElementById('out-table').innerHTML = HTML;
 
-					self.showTransformData = XLSX.utils.sheet_to_json(ws);
-					self.isShow = true;
-				};
+                                        self.showTransformData = XLSX.utils.sheet_to_json(ws);
+                                        self.isShow = true;
+                                };
 
-				reader.readAsArrayBuffer(file);
-			},
-			onexport: function(evt) {
-				if (null === this.shipDate)
-				{
-					Swal.fire({
-					  title: 'Error!',
-					  text: '尚未輸入出貨日期！',
-					  icon: 'error',
-					  confirmButtonText: 'Cool'
-					});
+                                reader.readAsArrayBuffer(file);
+                        },
+                        onexport: function(evt) {
+                                if (null === this.shipDate)
+                                {
+                                        Swal.fire({
+                                          title: 'Error!',
+                                          text: '尚未輸入出貨日期！',
+                                          icon: 'error',
+                                          confirmButtonText: 'Cool'
+                                        });
 
-					return;
-				}
-				/* generate workbook object from table */
-				var wb = XLSX.utils.table_to_book(document.getElementById('datatables'));
+                                        return;
+                                }
 
-				/* generate file and force a download*/
-				XLSX.writeFile(wb, "transform.xlsx");
-			}
-		}
-	});
-	</script>
+                                /* generate workbook object from table */
+                                var wb = XLSX.utils.table_to_book(document.getElementById('datatables'), { raw: true });
+
+                                /* generate file and force a download*/
+                                XLSX.writeFile(wb, "transform.xlsx");
+                        }
+                }
+        });
+        </script>
 </body>
 
 </html>
